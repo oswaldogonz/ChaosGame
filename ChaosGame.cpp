@@ -15,6 +15,19 @@ int main()
 	VideoMode vm(1920, 1080);
 	// Create and open a window for the game
 	RenderWindow window(vm, "Chaos Game!!", Style::Default);
+
+
+	Text messageText;
+  	Font font;
+  	font.loadFromFile("fonts/KOMIKAP_.ttf");
+  	messageText.setFont(font);
+  	messageText.setString("Click any three points on the screen to create a triangle");
+  	messageText.setCharacterSize(75);
+  	messageText.setFillColor(Color::White);
+	
+  	FloatRect textRect = messageText.getLocalBounds();
+  	messageText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+  	messageText.setPosition(1920 / 2.0f, 1080 / 2.0f);
 	
 	vector<Vector2f> vertices;
 	vector<Vector2f> points;
@@ -38,19 +51,23 @@ int main()
 		    {
 			if (event.mouseButton.button == sf::Mouse::Left)
 			{
-			    std::cout << "the left button was pressed" << std::endl;
-			    std::cout << "mouse x: " << event.mouseButton.x << std::endl;
-			    std::cout << "mouse y: " << event.mouseButton.y << std::endl;
+				std::cout << "the left button was pressed" << std::endl;
+			    	std::cout << "mouse x: " << event.mouseButton.x << std::endl;
+			    	std::cout << "mouse y: " << event.mouseButton.y << std::endl;
 	
-			    if(vertices.size() < 3)
-			    {
-				vertices.push_back(Vector2f(event.mouseButton.x, event.mouseButton.y));
-			    }
-			    else if(points.size() == 0)
-			    {
-				///fourth click
-				///push back to points vector
-			    }
+			   	 if(vertices.size() < 3)
+			    	{
+					vertices.push_back(Vector2f(event.mouseButton.x, event.mouseButton.y));
+			    	}
+			    	else if(points.size() == 0)
+			    	{
+					///fourth click
+					///push back to points vector
+					points.push_back(Vector2f(event.mouseButton.x, event.mouseButton.y));
+			    	}
+				else
+				{
+					
 			}
 		    }
 		}
@@ -58,18 +75,25 @@ int main()
 		{
 			window.close();
 		}
+			
 		/*
 		****************************************
 		Update
 		****************************************
 		*/
-	
 		if(points.size() > 0)
 		{
-		    ///generate more point(s)
-		    ///select random vertex
-		    ///calculate midpoint between random vertex and the last point in the vector
-		    ///push back the newly generated coord.
+		    	///generate more point(s)
+		    	///select random vertex
+		    	///calculate midpoint between random vertex and the last point in the vector
+		   	///push back the newly generated coord.
+			for(int i=0;i<20;i++)
+			{
+				int vertex = rand() % 3;
+    				Vector2f middle((points[points.size()-1].x + vertices[vertex].x) / 2.0f, (points[points.size()-1].y + vertices[vertex].y) / 2.0f);
+    				points.push_back(middle); 
+			}
+
 		}
 	
 		/*
@@ -80,10 +104,17 @@ int main()
 		window.clear();
 		for(int i = 0; i < vertices.size(); i++)
 		{
-		    RectangleShape rect(Vector2f(10,10));
-		    rect.setPosition(Vector2f(vertices[i].x, vertices[i].y));
-		    rect.setFillColor(Color::Blue);
-		    window.draw(rect);
+		    	RectangleShape rect(Vector2f(10,10));
+		    	rect.setPosition(Vector2f(vertices[i].x, vertices[i].y));
+		    	rect.setFillColor(Color::Blue);
+		    	window.draw(rect);
+		}
+		for (int i = 0; i < points.size(); i++)
+		{
+    			RectangleShape dot(Vector2f(10, 10));
+    			dot.setPosition(points[i].x, points[i].y);
+    			dot.setFillColor(Color::red);
+    			window.draw(dot);
 		}
 		window.display();
 	}
