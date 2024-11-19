@@ -19,7 +19,7 @@ int main()
 	srand(time(0));
 	Text messageText;
   	Font font;
-  	font.loadFromFile("fonts/KOMIKAP_.ttf");
+  	font.loadFromFile("fonts/KOMIKAP_(2).ttf");
   	messageText.setFont(font);
   	messageText.setString("Click any three points on the screen to create a triangle");
   	messageText.setCharacterSize(100);
