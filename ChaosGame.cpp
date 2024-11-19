@@ -65,9 +65,6 @@ int main()
 					///push back to points vector
 					points.push_back(Vector2f(event.mouseButton.x, event.mouseButton.y));
 			    	}
-				else
-				{
-					
 			}
 		    }
 		}
@@ -113,7 +110,7 @@ int main()
 		{
     			RectangleShape dot(Vector2f(10, 10));
     			dot.setPosition(points[i].x, points[i].y);
-    			dot.setFillColor(Color::red);
+    			dot.setFillColor(Color::Red);
     			window.draw(dot);
 		}
 		window.display();
