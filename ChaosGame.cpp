@@ -16,13 +16,13 @@ int main()
 	// Create and open a window for the game
 	RenderWindow window(vm, "Chaos Game!!", Style::Default);
 
-
+	srand(time(0));
 	Text messageText;
   	Font font;
   	font.loadFromFile("fonts/KOMIKAP_.ttf");
   	messageText.setFont(font);
   	messageText.setString("Click any three points on the screen to create a triangle");
-  	messageText.setCharacterSize(75);
+  	messageText.setCharacterSize(100);
   	messageText.setFillColor(Color::White);
 	
   	FloatRect textRect = messageText.getLocalBounds();
