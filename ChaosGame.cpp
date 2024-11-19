@@ -22,8 +22,8 @@ int main()
   	font.loadFromFile("fonts/KOMIKAP_(2).ttf");
   	messageText.setFont(font);
   	messageText.setString("Click any three points on the screen to create a triangle");
-  	messageText.setCharacterSize(100);
-  	messageText.setFillColor(Color::White);
+  	messageText.setCharacterSize(50);
+  	messageText.setFillColor(Color::Red);
 	
   	FloatRect textRect = messageText.getLocalBounds();
   	messageText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
@@ -84,12 +84,9 @@ int main()
 		    	///select random vertex
 		    	///calculate midpoint between random vertex and the last point in the vector
 		   	///push back the newly generated coord.
-			for(int i=0;i<20;i++)
-			{
-				int vertex = rand() % 3;
-    				Vector2f middle((points[points.size()-1].x + vertices[vertex].x) / 2.0f, (points[points.size()-1].y + vertices[vertex].y) / 2.0f);
-    				points.push_back(middle); 
-			}
+			int vertex = rand() % 3;
+    			Vector2f middle((points[points.size()-1].x + vertices[vertex].x) / 2.0f, (points[points.size()-1].y + vertices[vertex].y) / 2.0f);
+    			points.push_back(middle); 
 
 		}
 	
@@ -99,6 +96,7 @@ int main()
 		****************************************
 		*/
 		window.clear();
+		window.draw(messageText);
 		for(int i = 0; i < vertices.size(); i++)
 		{
 		    	RectangleShape rect(Vector2f(10,10));
@@ -108,10 +106,14 @@ int main()
 		}
 		for (int i = 0; i < points.size(); i++)
 		{
-    			RectangleShape dot(Vector2f(10, 10));
-    			dot.setPosition(points[i].x, points[i].y);
-    			dot.setFillColor(Color::Red);
-    			window.draw(dot);
+    			RectangleShape point(Vector2f(10, 10));
+    			point.setPosition(points[i].x, points[i].y);
+    			point.setFillColor(Color::Red);
+    			window.draw(point);
+		}
+		if(vertices.size()==0)
+		{
+			window.draw(messageText);
 		}
 		window.display();
 	}
