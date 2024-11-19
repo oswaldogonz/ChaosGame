@@ -96,7 +96,6 @@ int main()
 		****************************************
 		*/
 		window.clear();
-		window.draw(messageText);
 		for(int i = 0; i < vertices.size(); i++)
 		{
 		    	RectangleShape rect(Vector2f(10,10));
@@ -112,7 +111,7 @@ int main()
     			window.draw(point);
 		}
 		if(vertices.size()==0)
-		{
+		{	
 			window.draw(messageText);
 		}
 		window.display();
