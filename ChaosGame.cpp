@@ -114,6 +114,11 @@ int main()
 		{	
 			window.draw(messageText);
 		}
+		if(vertices.size()==3&&points.size()==0)
+		{
+			messageText.setString("Add another point");
+			window.draw(messageText);
+		}
 		window.display();
 	}
 }
